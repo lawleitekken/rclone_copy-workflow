@@ -1,0 +1,26 @@
+name: Rclone Copy
+on:
+  workflow_dispatch:
+    inputs:
+      fin:
+        description: "File/Folder Name"
+        required: true
+
+defaults:
+  run:
+    shell: bash
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Installing Rclone
+        run: |
+          mkdir te 
+          cd te && curl https://rclone.org/install.sh | sudo bash
+      - name: Getting rclone config
+        run: |
+          cd ../../.. && ls -a && cd .config/ && mkdir rclone && cd rclone && wget ${{ secrets.CON_URL }} && ls -a
+
+      - name: Copying
+        run: |
+          rclone copy ${{ secrets.F_DRIVE }}:"${{ github.event.inputs.fin }}" ${{ secrets.T_DRIVE }}:Public --progress
