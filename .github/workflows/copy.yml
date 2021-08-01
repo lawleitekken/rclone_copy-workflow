@@ -19,8 +19,8 @@ jobs:
           cd te && curl https://rclone.org/install.sh | sudo bash
       - name: Getting rclone config
         run: |
-          cd ../../.. && ls -a && cd .config/ && mkdir rclone && cd rclone && wget ${{ secrets.CON_URL }} && ls -a
+          cd ../../.. && cd .config/ && mkdir rclone && cd rclone && wget ${{ secrets.CON_URL }}
 
       - name: Copying
         run: |
-          rclone copy ${{ secrets.F_DRIVE }}:"${{ github.event.inputs.fin }}" ${{ secrets.T_DRIVE }}:Public --progress
+          rclone copy --no-traverse --progress ${{ secrets.F_DRIVE }}:"${{ github.event.inputs.fin }}" ${{ secrets.T_DRIVE }}:${{ secrets.T_FNAME }}
