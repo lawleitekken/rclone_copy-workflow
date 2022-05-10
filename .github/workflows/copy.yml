@@ -23,4 +23,4 @@ jobs:
 
       - name: Copying
         run: |
-          rclone copy --no-traverse --progress ${{ secrets.F_DRIVE }}:"${{ github.event.inputs.fin }}" ${{ secrets.T_DRIVE }}:${{ secrets.T_FNAME }}
+          rclone copy --no-traverse --progress ${{ secrets.F_DRIVE }} "${{ github.event.inputs.fin }}" ${{ secrets.T_DRIVE }} ${{ secrets.T_FNAME }}
